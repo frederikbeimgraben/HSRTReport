@@ -33,14 +33,36 @@
 \def\fontsPath{\classPath/Assets/Fonts}
 \def\imagesPath{\classPath/Assets/Images}
 
+% Variants option
+\RequirePackage{l3keys2e}
+\RequirePackage{expl3}
+\ExplSyntaxOn
+\keys_define:nn { ReportOptions }
+  {
+    variant .choice:,
+    variant / meti   .code:n = { \def\ReportVariant{meti} },
+    variant / mki    .code:n = { \def\ReportVariant{mki} },
+    variant / huc    .code:n = { \def\ReportVariant{huc} },
+    variant .initial: n = {meti} % METI as default option
+  }
+\ProcessKeysOptions { ReportOptions }
+\ExplSyntaxOff
+\providecommand{\ReportVariant}{meti}
+\AtBeginDocument{
+  \typeout{INFO – Selected Report Variant: \ReportVariant}
+}
+
 %----------------------------------------
 %   CLASS DEFINITION AND PARAMETERS
 %----------------------------------------
 % Original: ZHAWReport.cls by Martin Oswald
 \NeedsTeXFormat{LaTeX2e}
 \newcommand{\classname}{HSRTReport/HSRTReport}
-\ProvidesClass{\classname}[2024/07/08 HSRT Report Class]
+\ProvidesClass{\classname}[HSRT Report Class]
 \providecommand{\baseclass}{scrreprt}
+
+% Options for this class
+\DeclareOption{variant}{}
 
 % Default options
 \PassOptionsToClass{pointlessnumbers}{\baseclass}
