@@ -8,6 +8,11 @@
 % ==============================================================================
 
 % ==============================================================================
+% Required Packages
+% ==============================================================================
+\RequirePackage{listings}
+
+% ==============================================================================
 % Page Style Configuration
 % ==============================================================================
 \pagestyle{fancy}
@@ -117,11 +122,11 @@
 }
 
 % ==============================================================================
-% Needspace Package for Conditional Page Breaks
+% Required Packages
 % ==============================================================================
-\usepackage{needspace}
-
-% Section spacing is handled in PageBreakControl.tex
+\RequirePackage{needspace}
+\RequirePackage{setspace}    % For line spacing control
+\RequirePackage{ragged2e}    % For justified text and margin control
 
 % ==============================================================================
 % Float Placement Control

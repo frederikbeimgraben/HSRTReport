@@ -1,0 +1,88 @@
+% !TEX root = HSRTReport.cls
+% ==============================================================================
+% Core Package Imports
+% ==============================================================================
+% Description: Essential packages that are used throughout the document class
+% Author: Frederik Beimgraben
+% License: Creative Commons CC BY 4.0
+% ==============================================================================
+
+% ==============================================================================
+% Essential Core Packages
+% ==============================================================================
+% These packages provide fundamental functionality used across multiple modules
+
+% Language and encoding
+\RequirePackage[ngerman]{babel}       % German language support
+\RequirePackage[T1]{fontenc}          % Output font encoding
+
+% Basic document structure
+\RequirePackage[a4paper, margin=2cm]{geometry}  % Page geometry
+
+% Core utilities
+\RequirePackage{calc}                 % Calculation support for lengths
+\RequirePackage{xfp}                  % Modern floating point calculations
+\RequirePackage{keyval}               % Key-value interface
+\RequirePackage{ifthen}               % Conditional commands
+\RequirePackage{etoolbox}             % Command patching and programming
+\RequirePackage{expl3}                % LaTeX3 programming layer
+\RequirePackage{l3keys2e}             % LaTeX3 key-value interface
+
+% Graphics fundamentals
+\RequirePackage{graphicx}             % Basic graphics inclusion
+\RequirePackage{svg}                  % SVG support
+\RequirePackage{transparent}          % Transparency support
+
+% Color support
+\RequirePackage{xcolor}               % Extended color support
+
+% Environment and hook management
+\RequirePackage{environ}              % Environment definitions
+\RequirePackage{bophook}              % Hook management (for \AtBeginPage)
+\RequirePackage{arrayjobx}            % Array handling (required for logo management)
+
+% Text generation (for examples/demos)
+\RequirePackage{lipsum}               % Lorem ipsum text generation
+
+% Tables
+\RequirePackage{tabularx}             % Tables with fixed width columns
+\RequirePackage{longtable}            % Tables spanning multiple pages
+\RequirePackage{multirow}             % Multi-row table cells
+\RequirePackage{arydshln}             % Dotted lines in tables
+\RequirePackage{array}                % Enhanced array/table functionality
+
+% Lists
+\RequirePackage{enumitem}             % Customized lists
+
+% Captions and floats
+\RequirePackage{caption}              % Figure and table captions
+\RequirePackage[subrefformat=parens]{subcaption}  % Subfigures and subcaptions
+\RequirePackage{floatrow}             % Advanced float customization
+
+% Additional symbols
+\RequirePackage{pifont}               % Special symbols
+\RequirePackage{fontawesome5}         % Font Awesome icons
+
+% TikZ support (used by multiple modules)
+\RequirePackage{tikz}                 % TikZ for drawing
+\RequirePackage{pgf}                  % PGF/TikZ libraries
+\RequirePackage{pgffor}               % For \foreach command
+
+% Counter manipulation
+\RequirePackage{chngcntr}             % Change counter dependencies
+
+% Line spacing
+\RequirePackage{setspace}             % Line spacing control
+
+% Section formatting
+\RequirePackage{titlesec}             % Section title customization
+
+% Accessibility
+\RequirePackage{accsupp}              % Accessibility support for watermarks
+
+% Frame/box support
+\RequirePackage[framemethod=TikZ]{mdframed}  % Framed boxes with TikZ
+
+% ==============================================================================
+% Note: Module-specific packages are loaded in their respective files
+% ==============================================================================

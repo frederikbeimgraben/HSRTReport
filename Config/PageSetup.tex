@@ -10,8 +10,11 @@
 % ==============================================================================
 % Required Packages
 % ==============================================================================
-\usepackage{lastpage}  % For "Page X of Y" functionality
-\usepackage{fancyhdr}  % Already loaded, but ensure it's available
+\RequirePackage{lastpage}  % For "Page X of Y" functionality
+\RequirePackage{fancyhdr}  % For headers and footers
+\RequirePackage{ifthen}    % For conditional statements
+\RequirePackage{xcolor}    % For color support (used for gray text)
+\RequirePackage{etoolbox}  % For \ifdef command
 
 % ==============================================================================
 % Page Style Configuration

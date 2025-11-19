@@ -16,10 +16,6 @@
 \cs_new_eq:NN \strcompare \str_if_eq:eeTF
 \ExplSyntaxOff
 
-% Suppress all warnings; Only show errors
-\usepackage{silence}
-\WarningsOff*
-
 % If not using XeTeX, print an error message and stop compiling
 \ifx\XeTeXversion\undefined
 	\PackageError{HSRTReport}{This class can only be used with XeLaTeX.}{}
@@ -62,12 +58,8 @@
 \providecommand{\baseclass}{scrreprt}
 
 % Options for this class
-\DeclareOption{variant}{}
+\DeclareOption{variant}{} % Handled by keys_define:nn { ReportOptions }
 
-% Default options
-\PassOptionsToClass{pointlessnumbers}{\baseclass}
-
-% Forward options to the base class
 \DeclareOption*{\PassOptionsToClass{\CurrentOption}{\baseclass}}
 \ProcessOptions\relax
 
@@ -77,14 +69,8 @@
 % ==============================================================================
 % Package Imports
 % ==============================================================================
-% Load core packages first
-\input{\classPath/Imports/Core}
-% Document structure packages
-\input{\classPath/Imports/Document}
-% Content and typography packages
-\input{\classPath/Imports/Content}
-% Graphics and TikZ packages
-\input{\classPath/Imports/Graphics}
+% Load general packages that are used across multiple modules
+\input{\classPath/Imports}
 
 % ==============================================================================
 % Module Includes
@@ -102,7 +88,6 @@
 \input{\classPath/Config/GlossarySettings}
 \input{\classPath/Config/ToC}
 \input{\classPath/Config/Equations}
-\input{\classPath/Config/Floats}
 \input{\classPath/Config/Typography}
 \input{\classPath/Config/PageBreakControl}
 
