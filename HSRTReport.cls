@@ -87,6 +87,7 @@
 \input{\classPath/Pages/Titlepage}
 \input{\classPath/Pages/Bibliography}
 \input{\classPath/Pages/TOC}
+\input{\classPath/Pages/Glossaries}
 
 % ------------------------------------------------------------------------------
 % Configuration Modules
@@ -101,6 +102,7 @@
 \input{\classPath/Config/Equations}
 \input{\classPath/Config/Typography}
 \input{\classPath/Config/PageBreakControl}
+\input{\classPath/Config/CleverefNames}
 
 % ------------------------------------------------------------------------------
 % Content Modules
@@ -130,5 +132,6 @@
 }
 
 \AtEndEnvironment{document}{
+  \makeglossarypages
   \makebib
 }
