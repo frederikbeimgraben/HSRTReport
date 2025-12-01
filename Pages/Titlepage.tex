@@ -29,7 +29,8 @@
 }
 
 \renewcommand{\maketitle}{
-  \setcounter{page}{0}
+  \def\istitlepage=\true
+  \pagenumbering{arabic}
 	\providecommand{\titlepageabstract}{%
 		Dies ist ein Beispiel für ein Abstract. Es sollte eine kurze Zusammenfassung des Inhalts des Seminars sein.
 	}
@@ -97,5 +98,4 @@
 
 		\GetTitlePageDataTable
 	\end{titlepage}
-	\pagestyle{fancy}  % Activate fancy page style after title page
 }

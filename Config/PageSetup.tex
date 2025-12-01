@@ -10,36 +10,15 @@
 % ==============================================================================
 % Required Packages
 % ==============================================================================
-\RequirePackage{fancyhdr}
 \RequirePackage{ifthen}
 \RequirePackage{xcolor}
 \RequirePackage{etoolbox}
-
-% ==============================================================================
-% Page Style Configuration
-% ==============================================================================
-% Use fancy page style for headers and footers
-\pagestyle{fancy}
-
-\renewcommand{\headrulewidth}{0pt}
-
-% Override KOMA-Script chapter page style to use fancy instead of plain
-\renewcommand{\chapterpagestyle}{fancy}
-
-% ==============================================================================
-% Page Number Configuration
-% ==============================================================================
-% Set page number font style
-\setkomafont{pagenumber}{\color{gray}\blenderfont\selectfont}
-
-% Adjust footer position - move up by reducing footskip
-\setlength{\footskip}{25pt}  % Reduced from default to move footer up
+\RequirePackage[singlespacing=true]{scrlayer-scrpage}
+\clearpairofpagestyles
 
 % ==============================================================================
 % Header and Footer Setup
 % ==============================================================================
-\fancyhf{}
-
 \AtEndDocument{
   \immediate\write\@auxout{\string\gdef\string\@lastpage{\thepage}}
 }
@@ -51,86 +30,33 @@
 % Right header: Document title
 % Left footer: Author and module name
 % Center footer: Page number
-\def\hffont{\color{gray}\blenderfont}
+\setkomafont{pageheadfoot}{\color{gray}\blenderfont}
+\setkomafont{pagenumber}{\color{gray}\blenderfont}
+\setlength{\footskip}{35pt}
 
-\newcommand{\fancyfootL}{
-  \hffont
-  \vspace{-1.25em}
-  \def\arraystretch{1}
-  \begin{tabular}{l}
-    \@author \\
-    \ifdef{\modulename}{\modulename}{Modul-Name}
-  \end{tabular}
-}
-
-\newcommand{\fancyfootC}{
-  \hffont
-	Seite~\thepage~von~\@ifundefined{@lastpage}{??}{\@lastpage}
-}
-
-\newcommand{\fancyheadR}{
-  \hffont
+\ohead*{
   \ifnum\value{chapter}>0\relax
-    \thechapter~–~\leftmark
-	\fi%
+    \Roman{\thechapter}~–~\Chaptername
+	\fi
 }
 
-\newcommand{\fancyheadL}{
-  \hffont
-	\@title
+\ifoot{\@author}
+
+\cfoot{
+  \ifnum\value{chapter}>0\relax
+    Seite~\thepage\@ifundefined{@lastpage}{}{~von~\@lastpage}
+	\fi
 }
 
-\newcommand{\applyhfstyles}{
-  \fancyhead[R]{
-    \fancyheadR
-  }
-  \fancyhead[L]{
-    \fancyheadL
-  }
-  \fancyfoot[C]{
-    \fancyfootC
-  }
-  \fancyfoot[L]{
-    \fancyfootL
-  }
+\ohead{
+  \ifnum\value{chapter}>0\relax
+    \thechapter~–~\Chaptername
+	\fi
 }
 
-\newcommand{\footerhorizspacing}{\qquad}
+\ihead{\@title}
 
-% Apply Styles
-\applyhfstyles
-
-% Update chapter marks to show only chapter name without "Chapter" prefix
-\renewcommand{\chaptermark}[1]{\markboth{#1}{}}
-\renewcommand{\sectionmark}[1]{}
-
-% ==============================================================================
-% Plain Page Style (for chapter pages)
-% ==============================================================================
-% Define the plain page style (used on chapter start pages)
-\fancypagestyle{plain}{%
-	\fancyhf{}%
-	\applyhfstyles
-	\renewcommand{\headrulewidth}{0pt}
-}
-
-% ==============================================================================
-% Fancy Page Style Definition
-% ==============================================================================
-% Explicitly define the fancy page style
-\fancypagestyle{fancy}{%
-	\fancyhf{}%
-	\applyhfstyles
-}
-
-% ==============================================================================
-% Override Default Page Styles
-% ==============================================================================
-% Ensure all special pages use fancy style
-\AtBeginDocument{%
-	\pagestyle{fancy}%
-	\renewcommand{\chapterpagestyle}{fancy}%
-}
+\pagestyle{scrheadings}
 
 % ==============================================================================
 % End of Page Setup Module

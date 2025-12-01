@@ -77,6 +77,14 @@
 \newcommand{\footerYShift}{1.5em}
 \newcommand{\footerXShift}{0.7em}
 
+\newcommand*{\IsInteger}[3]{%
+    \IfStrEq{#1}{ }{%
+        #3% is a blank string
+    }{%
+        \IfInteger{#1}{#2}{#3}%
+    }%
+}%
+
 % ==============================================================================
 % Logo Placement on Pages
 % ==============================================================================
@@ -90,27 +98,26 @@
 				\includegraphics[height=\imageHeight]{\imagesPath/DUMMY_FOOT.png}
 			}
 		};
-		\ifnum\thepage=0
-		\else
-		\ifdefstring{\ShowFooterLogos}{\true}{
-			\foreach \i in {1,...,\value{logoCounter}} {
-					% Calculate name for i-1
-					\pgfmathtruncatemacro{\prev}{\i-1}
-					\node[anchor=east, inner sep=0pt, xshift=-1.5cm, yshift=2pt] (logo\i) at (logo\prev.west) {
-						\makeatletter
-						\testarray{LogosScales}(\i)
-						\setlength{\imageHeight}{1.5cm*\real{\temp@macro}*\real{\logosScale}*\real{0.55}}
-						\testarray{LogosPaths}(\i)
-						\begin{tikzpicture}
-							\node[] {
-							  \includegraphics[height=\imageHeight]{\logospath\temp@macro.pdf}
-							};
-						\end{tikzpicture}
-						\makeatother
-					};
-				}
-			}{}
-		\fi
+		\ifdefstring{\istitlepage}{\true}{}{
+  		\strcompare{\ShowFooterLogos}{\true}{
+  		  \foreach \i in {1,...,\value{logoCounter}} {
+  				% Calculate name for i-1
+  				\pgfmathtruncatemacro{\prev}{\i-1}
+  				\node[anchor=east, inner sep=0pt, xshift=-1.5cm, yshift=2pt] (logo\i) at (logo\prev.west) {
+  					\makeatletter
+  					\testarray{LogosScales}(\i)
+  					\setlength{\imageHeight}{1.5cm*\real{\temp@macro}*\real{\logosScale}*\real{0.55}}
+  					\testarray{LogosPaths}(\i)
+  					\begin{tikzpicture}
+  						\node[] {
+  						  \includegraphics[height=\imageHeight]{\logospath\temp@macro.pdf}
+  						};
+  					\end{tikzpicture}
+  					\makeatother
+  				};
+  			}
+  		}{}
+		}
 		% Skyline
 		\node[anchor=south west, inner sep=0pt, yshift=0em] at (current page.south west) {
 			\includegraphics[width=1.5\paperwidth]{\skylinePath}

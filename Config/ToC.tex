@@ -10,7 +10,7 @@
 % ==============================================================================
 % Required Packages
 % ==============================================================================
-\RequirePackage{tocloft}
+% \RequirePackage{tocloft}
 \RequirePackage{etoolbox}
 \RequirePackage{listings}
 
@@ -44,42 +44,17 @@
 ]{chapter}
 
 % ==============================================================================
-% Page Number Formatting in TOC
-% ==============================================================================
-% Configure page number font for different section levels
-\renewcommand\cftchappagefont{\blenderfont\color{gray}}
-\renewcommand\cftsecpagefont{\blenderfont\color{gray}}
-\renewcommand\cftsubsecpagefont{\blenderfont\color{gray}}
-\renewcommand\cftsubsubsecpagefont{\blenderfont\color{gray}}
-
-% ==============================================================================
-% Entry Title Formatting in TOC
-% ==============================================================================
-% Configure entry title font for different section levels
-\renewcommand\cftchapfont{\blenderfont\color{gray}}
-\renewcommand\cftsecfont{\blenderfont\color{gray}}
-\renewcommand\cftsubsecfont{\blenderfont\color{gray}}
-\renewcommand\cftsubsubsecfont{\blenderfont\color{gray}}
-
-% ==============================================================================
 % Section Command TOC Formatting
 % ==============================================================================
 % Configure TOC entry and page number format for sections and subsections
 \RedeclareSectionCommands[
 	tocentryformat=\blenderfont\normalsize,
 	tocpagenumberformat=\blenderfont\normalsize,
-	tocindent=1.5em,% Indent for sections
-	tocnumwidth=2.5em% Width for section numbers
 ]{section,subsection}
-
-% Add spacing before sections in TOC
-\RedeclareSectionCommand[
-	tocbeforeskip=0.5em,% Small space before section entries
-]{section}
 
 % Keep sections with their subsections
 \pretocmd{\addsectiontocentry}{%
-	\penalty-500% Allow break before sections but discourage it
+	\penalty-500 % Allow break before sections but discourage it
 }{}{}
 
 % Keep subsections together
@@ -87,29 +62,12 @@
 	\nopagebreak[3]%
 }{}{}
 
-% ==============================================================================
-% Figure and Table TOC Formatting
-% ==============================================================================
-% Configure font for figure entries in list of figures
-\renewcommand\cftfigfont{\blenderfont}
-\renewcommand\cftfigpagefont{\blenderfont}
-
-% Configure font for table entries in list of tables
-\renewcommand\cfttabfont{\blenderfont}
-\renewcommand\cfttabpagefont{\blenderfont}
-
 % Configure font for listing entries in lstlistings list
 \renewcommand*{\l@lstlisting}[2]{
 	\@dottedtocline{1}{1em}{2.3em}
 	{\blenderfont#1}
 	{\blenderfont#2}
 }
-
-% ==============================================================================
-% Dot Separation Configuration
-% ==============================================================================
-% Set spacing between dots in TOC
-% \renewcommand{\cftdotsep}{1.5}
 
 % ==============================================================================
 % End of Table of Contents Configuration Module

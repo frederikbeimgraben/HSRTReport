@@ -59,12 +59,30 @@
 \NeedsTeXFormat{LaTeX2e}
 \newcommand{\classname}{HSRTReport/HSRTReport}
 \ProvidesClass{\classname}[HSRT Report Class]
-\providecommand{\baseclass}{scrreprt}
+\providecommand{\baseclass}{scrbook}
 
 % Option setting if to show footer logos
 \def\ShowFooterLogos{\false}
 \DeclareOption{footerlogos}{
   \def\ShowFooterLogos{\true}
+}
+
+% Option setting if to include glossary
+\def\ShowGlossary{\false}
+\DeclareOption{glossary}{
+  \def\ShowGlossary{\true}
+}
+
+% Option setting if to include glossary for acronyms
+\def\ShowAcronyms{\false}
+\DeclareOption{acronyms}{
+  \def\ShowAcronyms{\true}
+}
+
+% Option setting if to omit toc
+\def\ShowToC{\true}
+\DeclareOption{notoc}{
+  \def\ShowToC{\false}
 }
 
 \DeclareOption*{\PassOptionsToClass{\CurrentOption}{\baseclass}}
@@ -86,7 +104,6 @@
 % ==============================================================================
 \input{\classPath/Pages/Titlepage}
 \input{\classPath/Pages/Bibliography}
-\input{\classPath/Pages/TOC}
 \input{\classPath/Pages/Glossaries}
 
 % ------------------------------------------------------------------------------
@@ -99,7 +116,6 @@
 \input{\classPath/Config/Sections}
 \input{\classPath/Config/GlossarySettings}
 \input{\classPath/Config/ToC}
-\input{\classPath/Config/Equations}
 \input{\classPath/Config/Typography}
 \input{\classPath/Config/PageBreakControl}
 \input{\classPath/Config/CleverefNames}
@@ -125,13 +141,24 @@
 % Add Pages
 % ------------------------------------------------------------------------------
 \AtBeginDocument{
+  \frontmatter
   \typeout{INFO – Selected Report Variant: \ReportVariant}
   \maketitle
+  \newpage
+  \def\istitlepage=\false
   \setstretch{1.0}
-  \maketoc
+  \strcompare{\ShowToC}{\true}{
+   	\tableofcontents
+  }{}
+  \mainmatter
 }
 
 \AtEndEnvironment{document}{
+  \newpage
+  \appendix
+  \backmatter
+  \cfoot*{}% Remove page number at footer.
+  \ohead*{}% Addd page number to the header.
   \makeglossarypages
   \makebib
 }
